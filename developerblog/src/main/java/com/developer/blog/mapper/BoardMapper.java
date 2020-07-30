@@ -8,4 +8,8 @@ public interface BoardMapper {
 	
 	public List<BoardVO> viewAll();
 
+	public List<BoardVO> getReportListAll();
+
+	public void reportWrite(BoardVO boardVO);
+
 }

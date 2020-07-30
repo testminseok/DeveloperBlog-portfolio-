@@ -15,9 +15,14 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper mapper;
 	
+	
 	@Override
-	public List<BoardVO> viewAll() {
-		return mapper.viewAll();
+	public List<BoardVO> getReportListAll() {
+		return mapper.getReportListAll();
 	}
 	
+	@Override
+	public void reportWrite(BoardVO boardVO) {
+		mapper.reportWrite(boardVO);
+	}
 }

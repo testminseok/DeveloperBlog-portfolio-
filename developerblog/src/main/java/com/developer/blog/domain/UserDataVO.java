@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class UserSignUpVO { 
+public class UserDataVO { 
 
 	private String userid, password, email;
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,124 +9,12 @@
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- font-awesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/resources/css/indexCss.css">
 </head> 
 <body> 
-	<!-- 상단 네비게이션 -->
-	<nav> 
-		<div class="container-fluid">
-			<div class="row"> 
-				<div class="col-sm-4"> 
-					<a href="/">개발자의 길</a> 
-				</div>
-				<div class="col-sm-4">
-					<button type="button" id="loginButton" data-toggle="modal" data-backdrop="false" data-target="#loginModal">login</button>
-				</div>
-				<!-- loginModal -->
-				<div class="modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true"> 
-					<div class="modal-dialog">
-						<div class="modal-content">
-							 
-							<!-- loginModal header -->  
-							<div class="modal-header">
-								<h4 class="modal-title" id="loginModalTitle">로그인</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							
-							<!-- loginModal body --> 
-							<div class="modal-body">
-								<div class="container">
-									<table>
-										<tr>
-											<td>아이디 :</td>
-											<td><input type="text"  id="loginUserid"></input></td>
-										</tr>
-										<tr>
-											<td></td><td><span id="checkId"></span><br></td>
-										</tr>
-										<tr>
-											<td>비밀번호 :</td>
-											<td><input type="password" id="loginUserpassword"></input></td>
-										</tr>
-										<tr>
-											<td></td><td><span id="checkPassword"></span><br></td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							<!-- loginModal footer -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-danger float-left" onclick="checkUserData()">로그인</button>
-								<button type="button" class="btn btn-danger" data-toggle="modal" data-backdrop="false" data-target="#SignUpModal" data-dismiss="modal">회원가입</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- SignUpModal -->
-				<div class="modal" id="SignUpModal"> 
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<!-- SignUpModal header -->  
-							<div class="modal-header">
-								<h4 class="modal-title">회원가입</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							
-							<form id="signUpUserData" action="/signUp" method="post">
-								<!-- SignUpModal body -->
-								<div class="modal-body">
-									<div class="container">
-										<table>
-											<tr>
-												<td>아이디 :</td>
-												<td><input type="text"  id="userid" name="userid"></input></td>
-												<td><button type="button" id="idOverlapCheck">중복확인</button></td>
-											</tr>
-											<tr>
-												<td></td><td><span id="signUpIdCheck"></span></td><td></td>
-											</tr>
-											<tr>
-												<td>비밀번호 :</td>
-												<td><input type="password" id="password" name="password"></input></td>
-											</tr>
-											<tr>
-												<td>이메일 :</td>
-												<td><input type="email" id="email" name="email"></input></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-								<!-- SignUpModal footer -->
-								<div class="modal-footer">
-									<button type="button" class="btn btn-danger float-left" onclick="signUpSubmit()">회원가입</button>
-									<input type="hidden" id="signUpCheck" value="false">
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>				
-				
-				<div class="col-sm-4 row">
-					<div class="col-sm-3">
-						<a href="/">Home</a>
-					</div> 
-					<div class="col-sm-3"> 
-						<a href="/">About Me</a>
-					</div>
-					<div class="col-sm-3">
-						<a href="/">Category</a>
-					</div>
-					<div class="col-sm-3">
-						<a href="/">Time Line</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		 
-	</nav>
-	
-	
+	<jsp:include page="/WEB-INF/include/navigationBar.jsp"></jsp:include>
 	<header>
 		<div class="container text-center">
 			<h2>Hello, World!</h2>
@@ -148,34 +37,16 @@
 	        <div class="blog-tags">#java  #jdk14  #openjdk</div>
 	        
 	    </article>
-	</div> 
-	
-	<footer>
-		<div class="container text-center">
-			<ul>
-				<li>
-					<a href="#"><i class="fa fa-github fa-5x" aria-hidden="true"></i></a>	
-				</li>
-				<li>
-					<a href="#"><i class="fa fa-facebook-square fa-5x" aria-hidden="true"></i></a>	
-				</li>
-				<li>
-					<a href="#"><i class="fa fa-twitter fa-5x" aria-hidden="true"></i></a>
-				</li>
-				<li>
-					<a href="#"><i class="fa fa-instagram fa-5x" aria-hidden="true"></i></a>	
-				</li>
-			</ul>
-			
-		</div>
-	</footer>
+	</div>
+	<jsp:include page="/WEB-INF/include/footer.jsp"></jsp:include>
+	 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 function checkUserData() {
 	
-	var userId = $("#userId").val();
+/* 	var userId = $("#userId").val();
 	var userPassword = $("#userPassword").val();
 	
 	if(userId == "개발자1" && userPassword == "123123")
@@ -199,7 +70,29 @@ function checkUserData() {
 		}else {
 			$("#checkPassword").text("");
 		}
-	}
+	} */
+	
+	$.ajax({
+		
+		type:"POST",
+		url:"/checkUserData",
+		data:{ "userId" : $("#loginUserid").val(),
+			   "userPassowrd" :$("#loginUserpassword").val()
+		},
+		success:function(check){
+			
+			if(check == "true"){
+				alert("로그인성공");
+				location.reload();
+			}else{
+				alert("아이디또는비밀번호를 확인해주세요");
+			}
+			
+		},
+		error:function(){
+			alert("실패");
+		}
+	});
 }
 
 $("#idOverlapCheck").click(function () {
@@ -218,9 +111,11 @@ $("#idOverlapCheck").click(function () {
 		success:function(check){
 			if (check == "true") {
 				$("#signUpIdCheck").text("사용하실 수 있는 아이디입니다.").css("color","green");
+				$("#beforeOverlapid").val($("#userid").val());
 				$("#signUpCheck").val("true");
 			}else{
 				$("#signUpIdCheck").text("이미 존재하는 아이디입니다").css("color","red");
+				$("#signUpCheck").val("false");
 			}
 		},
 		error:function(){
@@ -230,7 +125,7 @@ $("#idOverlapCheck").click(function () {
 });
 
 function signUpSubmit() {
-	if($("#signUpCheck").val() == "true"){
+	if($("#signUpCheck").val() == "true" && $("#beforeOverlapid").val() == $("#userid").val()){
 		$("#signUpUserData").submit();
 	}else{
 		alert("아이디중복체크를 해주세요");

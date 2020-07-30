@@ -6,5 +6,7 @@ import com.developer.blog.domain.BoardVO;
 
 public interface BoardService {
 
-	public List<BoardVO> viewAll();
+	public List<BoardVO> getReportListAll();
+
+	public void reportWrite(BoardVO boardVO);
 }
