@@ -14,7 +14,7 @@
 	<nav> 
 		<div class="container-fluid">
 			<div class="row"> 
-				<div class="col-sm-4"> 
+				<div class="col-sm-3"> 
 					<a href="/">개발자의 길</a> 
 				</div>
 				<div class="col-sm-4">
@@ -115,7 +115,7 @@
 					</div>
 				</div>				
 				
-				<div class="col-sm-4 row">
+				<div class="col-sm-5 row">
 					<div class="col-sm-3">
 						<a href="/">Home</a>
 					</div> 

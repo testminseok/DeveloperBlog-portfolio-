@@ -32,7 +32,8 @@
 	
 	<filter> 
 	    <filter-name>encodingFilter</filter-name> 
-	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	     
 	    <init-param> 
 		    <param-name>encoding</param-name> 
 		    <param-value>UTF-8</param-value> 
@@ -45,7 +46,17 @@
 	 <filter-mapping> 
 	    <filter-name>encodingFilter</filter-name> 
 	    <url-pattern>/*</url-pattern> 
-	 </filter-mapping> 
+	 </filter-mapping>
+	 
+	 <!-- HTTP Method Filter -->
+	<filter>
+	    <filter-name>httpMethodFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>httpMethodFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping> 
 
 
 </web-app>

@@ -11,7 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter 
 public class BoardVO {
-
+	
+	private int bno;
 	private String title, subheading, writer, content;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

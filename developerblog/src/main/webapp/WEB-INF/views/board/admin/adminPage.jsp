@@ -8,23 +8,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css"/>
 <link rel="stylesheet" href="https://nhn.github.io/tui.grid/latest/dist/tui-grid.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/include/navigationBar.jsp"></jsp:include> 
-<button type="button" onclick="location.href='/boardWrite'">글쓰기</button>  
-<button type="button">글수정</button>
-<button type="button">글삭제</button>
+<button type="button" class="btn btn-success" onclick="location.href='/boardWrite'">글쓰기</button>  
 
 
    <div id="grid" class="text-center"></div>
+   <div id="pagination" class="tui-pagination"></div>
    
    
 <jsp:include page="/WEB-INF/include/footer.jsp"></jsp:include>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.js"></script>
+<script src="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.js"></script>
 <script type="text/javascript" src="https://nhn.github.io/tui.grid/latest/dist/tui-grid.js"></script>
+
 <script type="text/javascript">
 
 window.onload = function(){
@@ -38,7 +41,6 @@ window.onload = function(){
 	
 	var grid = new tui.Grid({
 	    el: document.getElementById('grid'),
-	    //data: gridData,
 	    scrollX: false,
 	    scrollY: false,
 	    columns: [
@@ -69,16 +71,40 @@ window.onload = function(){
 	    }
 	  });
 	
+	
 	grid.on('click', function(ev) {
-		var target = ev.columnName;
-			
-		if (target == 'title') {
-			location.href = '/';
-		}
 		
+		var targetName = ev.columnName;
+		var getInstance = ev.instance;
+		var rowKey = ev.rowKey;
+			
+		if (targetName == 'title') {
+				location.href = '/boardDetails/'+getInstance.getValue(rowKey, 'bno');
+		}
+		 
 	});
 	
-	$.ajax({
+	var pagination = new tui.Pagination('pagination',{
+		 totalItems: '${reportListAllCount}',
+	     itemsPerPage: 10,
+	     visiblePages: 5
+	})
+	
+	pagination.on('beforeMove' ,function(ev){
+		$.ajax({
+			
+			url : "/toastList?perPage="+10+"&page="+ev.page,
+			type : "GET",
+			dataType : "JSON",
+			success : function(result){
+				console.dir(result);
+				grid.resetData(result); 
+			}
+			
+		}); 
+	})
+	
+	 $.ajax({
 		
 		url : "/toastList",
 		type : "GET",
@@ -88,7 +114,7 @@ window.onload = function(){
 			grid.resetData(result); 
 		}
 		
-	});
+	}); 
 };
 	
 </script>

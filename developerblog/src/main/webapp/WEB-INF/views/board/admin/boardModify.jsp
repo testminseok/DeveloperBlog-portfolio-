@@ -10,27 +10,29 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/include/navigationBar.jsp"></jsp:include> 
-<h2 class="text-center">글 작성</h2><br><br><br>
+<h2 class="text-center">글 수정</h2><br><br><br>
 
 <div class="container">
-	<form method="post" action="/reportWrite"> 
+	<form method="post" action="/boardModify">
+		<input type="hidden" name="_method" value="put"> 
 		<table style="width:30%">
 			<tr >
 				<td><strong>작성자 :</strong></td>
 				<td>
-					<span>${user.getUserid()}</span>
-					<input type="hidden" name="writer" value="${user.getUserid()}" readonly="readonly" />
+					<span>${boardVO.writer}</span>
+					<input type="hidden" name="writer" value="${boardVO.writer}" />
 				</td>
 			</tr>
 			<tr> 
-				<td><strong>제목 :</strong></td><td><input type="text" style="width:100%" name="title"/></td>  
+				<td><strong>제목 :</strong></td><td><input type="text" style="width:100%" name="title" value="${boardVO.title}"/></td>  
 			</tr>
 			<tr>
-				<td><strong>소제목 :</strong></td><td><input type="text" style="width:100%" class="w-50" name="subheading"/></td>
+				<td><strong>소제목 :</strong></td><td><input type="text" style="width:100%" class="w-50" name="subheading" value="${boardVO.subheading}"/></td>
 			</tr>
 		</table>
-		<textarea id="summernote" name="content"></textarea>   
-		<button type="submit">글 등록</button>
+		<textarea id="summernote" name="content">${boardVO.content }</textarea>
+		<input type="hidden" name="bno" value="${boardVO.bno }">   
+		<button type="submit">글 수정</button>
 	</form>
 </div>
 <jsp:include page="/WEB-INF/include/footer.jsp"></jsp:include>

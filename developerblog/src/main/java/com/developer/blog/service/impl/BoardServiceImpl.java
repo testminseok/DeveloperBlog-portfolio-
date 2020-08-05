@@ -25,4 +25,28 @@ public class BoardServiceImpl implements BoardService {
 	public void reportWrite(BoardVO boardVO) {
 		mapper.reportWrite(boardVO);
 	}
+	
+	@Override
+	public BoardVO getBoardData(int bno) {
+		return mapper.getBoardData(bno);
+	}
+	
+	@Override
+	public void boardModify(BoardVO boardvo) {
+		mapper.boardModify(boardvo);
+	}
+	
+	@Override
+	public void boardDelete(int bno) {
+		mapper.boardDelete(bno);
+	}
+	
+	@Override
+	public List<BoardVO> getReportListPart(int perPage, int page) {
+		return mapper.getReportListPart(perPage, page);
+	}
+	@Override
+	public int getReportListAllCount() {
+		return mapper.getReportListAllCount();
+	}
 }
