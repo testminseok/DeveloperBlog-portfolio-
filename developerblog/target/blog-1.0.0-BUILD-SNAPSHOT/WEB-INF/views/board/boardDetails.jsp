@@ -20,7 +20,7 @@
 	<h4 class="display-4"><fmt:formatDate value="${boardVO.reportingDate }" pattern="yyyy.MM.dd"/></h4>
 	<br>
 	<hr>
-	<div id="content"></div>
+	<div style="font-size: 30px;" class="w-100" id="content"></div>
 	<hr>
 	<div class="float-right">
 		<c:choose>
@@ -48,9 +48,7 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-		$("#content").html('${boardVO.content}')
-					 .css("font-size","30px")
-					 .css("word-break","break-all");
+		$("#content").html('${boardVO.content}');
 })
 
 function deleteCheck() {

@@ -24,4 +24,6 @@ public interface BoardMapper {
 
 	public int getReportListAllCount();
 
+	public List<String> getCategoryList();
+
 }

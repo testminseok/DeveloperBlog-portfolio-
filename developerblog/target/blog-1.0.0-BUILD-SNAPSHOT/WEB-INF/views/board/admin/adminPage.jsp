@@ -11,12 +11,12 @@
 <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.pagination/v3.3.0/tui-pagination.css"/>
 <link rel="stylesheet" href="https://nhn.github.io/tui.grid/latest/dist/tui-grid.css">
 </head>
-<body> 
+<body>
 <jsp:include page="/WEB-INF/include/navigationBar.jsp"></jsp:include> 
-<button type="button" class="btn btn-success mt-5" onclick="location.href='/boardWrite'">글쓰기</button>  
+<button type="button" class="btn btn-success" onclick="location.href='/boardWrite'">글쓰기</button>  
 
 
-   <div id="grid" class="text-center"></div> 
+   <div id="grid" class="text-center"></div>
    <div id="pagination" class="tui-pagination"></div>
    
    

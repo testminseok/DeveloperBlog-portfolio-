@@ -8,15 +8,15 @@
 	</insert>
 	
 	<select id="idOverlapCheck" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM USERDATA WHERE USERID = #{userId}
+		SELECT COUNT(*) FROM USERDATA WHERE USERID = '${userId}'
 	</select>
 	
 	<select id="loginUserCheck" parameterType="map" resultType="Integer">
-		SELECT COUNT(*) FROM USERDATA WHERE USERID = #{userId} AND PASSWORD = #{userPassowrd}
+		SELECT COUNT(*) FROM USERDATA WHERE USERID ='${userId}' AND PASSWORD ='${userPassowrd}'
 	</select>
 	
 	<select id="getUserData" parameterType="map" resultType="com.developer.blog.domain.UserDataVO">
-		SELECT * FROM USERDATA WHERE USERID = #{userId} AND PASSWORD = #{userPassowrd}
+		SELECT * FROM USERDATA WHERE USERID = '${userId}' AND PASSWORD = '${userPassowrd}'
 	</select>
 
 	

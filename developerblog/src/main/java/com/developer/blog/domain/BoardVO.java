@@ -10,12 +10,19 @@ import lombok.Setter;
 
 @Getter
 @Setter 
-public class BoardVO {
+public class BoardVO implements Comparable<BoardVO> {
 	
 	private int bno;
-	private String title, subheading, writer, content;
+	private String title, subheading, writer,category, content;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date reportingDate;
 	
+	private String formatDate;
+	
+	@Override
+	public int compareTo(BoardVO o) {
+		
+		return o.getReportingDate().compareTo(getReportingDate());
+	}
 }

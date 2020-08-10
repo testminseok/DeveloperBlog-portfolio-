@@ -1,5 +1,6 @@
 package com.developer.blog.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,8 +57,16 @@ public class BoardController {
 
 	//관리자 글쓰기 페이지로 이동
 	@GetMapping("/boardWrite")
-	public String adminBoardWrite(HttpSession session, HttpServletRequest request) {
+	public String adminBoardWrite(Model model,HttpSession session, HttpServletRequest request) {
+		List<String> categoryList = boardService.getCategoryList();
+		List<String> categoryDeduplication = new ArrayList<String>();
 		
+		for (String categoryName : categoryList) {
+			if(!categoryDeduplication.contains(categoryName)) {
+				categoryDeduplication.add(categoryName);
+			}
+		}
+		model.addAttribute("categoryDeduplication",categoryDeduplication);
 		return "board/admin/boardWrite";
 	}
 	
@@ -67,7 +76,8 @@ public class BoardController {
 		
 		boardService.reportWrite(boardVO);
 		
-		return "redirect: /adminPage";
+		return "board/admin/adminPage";
+//		return "redirect: /adminPage";
 	}
 	
 	//글 상세보기

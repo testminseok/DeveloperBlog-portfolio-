@@ -49,4 +49,9 @@ public class BoardServiceImpl implements BoardService {
 	public int getReportListAllCount() {
 		return mapper.getReportListAllCount();
 	}
+	
+	@Override
+	public List<String> getCategoryList() {
+		return mapper.getCategoryList();
+	}
 }

@@ -7,51 +7,30 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/navBarAndFooterCss.css" />
 </head>
 <body>
 	<!-- 상단 네비게이션 -->
-	<nav id="navbar" class="navbar fixed-top">
-		<div class="row w-100">
-			<div class="col-sm-2">
-				<a href="/">개발자의 길</a>			
-			</div> 
-			<div class="col-sm-2">
-				<c:choose>
-					<c:when test="${user != null}">
-						${user.getUserid()} 님 반갑습니다. <button type="button" class="btn btn-outline-warning btn-sm" onclick="alert('로그아웃 되었습니다.'); location.href='/userLogout'" >로그아웃</button>
-						<c:if test="${user.getUserid() eq 'admin' }">
-							<button type="button" class="btn btn-outline-warning btn-sm" onclick="location.href='/adminPage'">글관리</button> 
-						</c:if>
-					</c:when> 
-					<c:otherwise>
-						<button type="button" class="btn btn-outline-warning btn-sm" id="loginButton" data-toggle="modal" data-backdrop="false" data-target="#loginModal">로그인</button>
-					</c:otherwise>
-				</c:choose>			
-			</div> 
-			<div class="col-sm-4 text-center">
-				<img id="profilebox"class="profilebox" alt="시간여행자의아내" src="/resources/images/시간여행자의아내.jpg">
-			</div>
-			<div class="col-sm-4"> 
-				<ul class="nav justify-content-end">
-				  <li class="nav-item"> 
-				    <a class="nav-link" href="/">Home</a> 
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="/aboutMe">About Me</a> 
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="/category">Category</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="/timeline">Time Line</a>
-				  </li>
-				</ul>				
-			</div>			
-		</div> 
-	</nav>
-			<!-- loginModal -->
+	<nav id="navbar"> 
+		<div class="container-fluid">
+			<div class="row"> 
+				<div class="col-sm-3"> 
+					<a href="/">개발자의 길</a> 
+				</div>
+				<div class="col-sm-4">
+					<c:choose>
+						<c:when test="${user != null}">
+							${user.getUserid()} 님 반갑습니다. <button type="button" onclick="alert('로그아웃 되었습니다.'); location.href='/userLogout'" >로그아웃</button>
+							<c:if test="${user.getUserid() eq 'admin' }">
+								<button type="button" onclick="location.href='/adminPage'">글관리</button> 
+							</c:if>
+						</c:when> 
+						<c:otherwise>
+							<button type="button" id="loginButton" data-toggle="modal" data-backdrop="false" data-target="#loginModal">로그인</button>
+						</c:otherwise>
+					</c:choose> 
+				</div>
+				<!-- loginModal -->
 				<div class="modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true"> 
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -76,7 +55,7 @@
 										</tr>
 										<tr>
 											<td>비밀번호 :</td>
-											<td><input type="password" id="loginUserpassword" onkeyup="loginEnter()"></input></td>
+											<td><input type="password" id="loginUserpassword"></input></td>
 										</tr>
 										<tr>
 											<td></td><td><span id="checkPassword"></span><br></td>
@@ -134,27 +113,36 @@
 							</form>
 						</div>
 					</div> 
+				</div>				
+				
+				<div class="col-sm-5 row">
+					<div class="col-sm-3">
+						<a href="/">Home</a>
+					</div> 
+					<div class="col-sm-3"> 
+						<a href="/">About Me</a>
+					</div>
+					<div class="col-sm-3">
+						<a href="/">Category</a>
+					</div>
+					<div class="col-sm-3">
+						<a href="/">Time Line</a>
+					</div>
 				</div>
-				<div style="height: 100px;"></div>
+			</div>
+		</div>
+	</nav>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="/resources/js/navBarAndFooterJS.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-window.onload = function(){
-	$("#navbar").css("height","100px")
-				.css("transition", "height 1s");
-}
-
 window.addEventListener('scroll', function() {
 	var scrollLcation = document.documentElement.scrollTop;
 	if (scrollLcation == 0) {
-		$("#navbar").css("height","100px")
-					.css("transition", "height 1s");
-		$("#profilebox").fadeIn(1000);
+		$("#navbar").removeClass("navbarscrolldown");
+		$("#navbar").addClass("navbarscrollup");
 	}else {
-		$("#navbar").css("height","80px")
-					.css("transition", "height 1s");
-		$("#profilebox").fadeOut(1000);
+		$("#navbar").removeClass("navbarscrollup");
+		$("#navbar").addClass("navbarscrolldown");
 	}
 	
 })

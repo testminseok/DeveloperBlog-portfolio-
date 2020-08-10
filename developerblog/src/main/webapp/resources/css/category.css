@@ -1,0 +1,10 @@
+.title{
+	font-size:20px;
+	color:gray;
+	text-decoration: none;
+	
+}
+
+.title:hover{
+	text-decoration: none;
+}

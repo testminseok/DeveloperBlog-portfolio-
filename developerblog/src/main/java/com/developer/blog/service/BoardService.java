@@ -19,4 +19,6 @@ public interface BoardService {
 	public List<BoardVO> getReportListPart(int startNum, int endNum);
 
 	public int getReportListAllCount();
+
+	public List<String> getCategoryList();
 }

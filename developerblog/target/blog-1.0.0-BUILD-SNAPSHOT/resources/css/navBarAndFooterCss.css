@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+nav {
+
+}
+
+nav a{ 
+	font-weight: 800;
+	color: black;
+	font-size: 20px;
+}  
+ 
+.navbarscrollup {
+	color: red;
+	-webkit-animation-name : scrollAfter;
+	-webkit-animation-duratuion : 4s;
+}
+
+.navbarscrolldown { 
+	color:blue;
+	-webkit-animation-name : scrollBefore;
+	-webkit-animation-duratuion : 4s;
+}
+
+@-webkit-keyframes navbarscrolldown{
+	0% {
+		height: auto;
+	}
+	100% {
+		height: 200px;
+	}
+}
+
+@-webkit-keyframes scrollBefore {
+	0%{
+		height: 200px;
+	}
+	100%{
+		height : auto ;
+	}
+	
+}
+
+
+
+
+/* index footer*/
+
+footer {
+	background-color: #FAF4C0;
+}
+
+footer > div > ul > li{
+	list-style-type: none; display: inline; margin-left: 30px;
+}
+
+footer > div > ul > li > a > i { 
+	color:black;
+}
+

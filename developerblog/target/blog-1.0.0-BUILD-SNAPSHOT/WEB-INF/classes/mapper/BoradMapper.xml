@@ -12,13 +12,12 @@
 	<insert id="reportWrite" parameterType="com.developer.blog.domain.BoardVO">
 		INSERT INTO BLOGBOARD 
 		VALUES(
-			BNO_SEQ.NEXTVAL,
-			#{title},
-			#{subheading},
-			#{writer},
-			#{category},
-			#{content},
-			SYSDATE
+			'${title}',
+			'${subheading}',
+			'${writer}',
+			SYSDATE,
+			'${content}',
+			BNO_SEQ.NEXTVAL 
 		)
 	</insert>
 	
@@ -26,24 +25,23 @@
 	<select id="getBoardData" parameterType="Integer" resultType="com.developer.blog.domain.BoardVO">
 		SELECT *
 		FROM BLOGBOARD
-		WHERE BNO = #{bno}
+		WHERE BNO = ${bno}
 	</select>
 	
 	<!-- 게시글 번호로 게시글 수정하기 -->
 	<update id="boardModify" parameterType="com.developer.blog.domain.BoardVO">
 		UPDATE BLOGBOARD
-		SET TITLE = #{title},
-			SUBHEADING = #{subheading},
-			CONTENT = #{content},
-			CATEGORY = #{category}
-		WHERE BNO = #{bno}
+		SET TITLE = '${title}',
+			SUBHEADING = '${subheading}',
+			CONTENT = '${content}'
+		WHERE BNO = '${bno}'
 			
 	</update>
 	
 	<!-- 게시글 번호로 게시글 삭제하기 -->
 	<delete id="boardDelete" parameterType="Integer" >
 		DELETE FROM BLOGBOARD
-		WHERE BNO = #{bno}
+		WHERE BNO = '${bno}'
 	</delete>
 	
 	<!-- 게시글 목록 페이징 -->
@@ -57,18 +55,12 @@
 		                ORDER BY BNO DESC
 		              ) a
 		      )
-		WHERE rn BETWEEN #{startNum} AND #{endNum}
+		WHERE rn BETWEEN ${startNum} AND ${endNum}
 	</select>
 	
 	<!-- 게시글 전체 글 수 -->
 	<select id="getReportListAllCount" resultType="Integer">
 		SELECT COUNT(*)
-		FROM BLOGBOARD
-	</select>
-	
-	<!-- 카테고리 목록가져오기 -->
-	<select id="getCategoryList" resultType="String">
-		SELECT CATEGORY 
 		FROM BLOGBOARD
 	</select>
 
