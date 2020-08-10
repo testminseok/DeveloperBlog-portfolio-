@@ -11,13 +11,13 @@
 </head>
 <body>
 	<!-- 상단 네비게이션 -->
-	<nav> 
+	<nav id="navbar" class="align-self-center"> 
 		<div class="container-fluid">
 			<div class="row"> 
 				<div class="col-sm-3"> 
 					<a href="/">개발자의 길</a> 
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-2">
 					<c:choose>
 						<c:when test="${user != null}">
 							${user.getUserid()} 님 반갑습니다. <button type="button" onclick="alert('로그아웃 되었습니다.'); location.href='/userLogout'" >로그아웃</button>
@@ -112,7 +112,10 @@
 								</div>
 							</form>
 						</div>
-					</div>
+					</div> 
+				</div>
+				<div class="col-sm-2 text-center" id="profileboxParent"  >
+					<img id="profilebox"class="profilebox" alt="시간여행자의아내" src="/resources/images/시간여행자의아내.jpg">
 				</div>				
 				
 				<div class="col-sm-5 row">
@@ -127,13 +130,30 @@
 					</div>
 					<div class="col-sm-3">
 						<a href="/">Time Line</a>
-					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
 	</nav>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	$("#navbar").css("height","100px").css("transition", "height 1s");
+}
+
+window.addEventListener('scroll', function() {
+	var scrollLcation = document.documentElement.scrollTop;
+	if (scrollLcation == 0) {
+		$("#navbar").css("height","100px").css("transition", "height 1s");
+		$("#profilebox").fadeIn(1000);
+	}else {
+		$("#navbar").css("height","50px").css("transition", "height 1s");
+		$("#profilebox").fadeOut(1000);
+	}
+	
+})
+</script>
 
 </body>
 </html>

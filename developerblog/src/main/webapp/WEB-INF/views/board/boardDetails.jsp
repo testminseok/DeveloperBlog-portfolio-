@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -22,9 +23,16 @@
 	<div style="font-size: 30px;" class="w-100" id="content"></div>
 	<hr>
 	<div class="float-right">
-		<button type="button" class="btn btn-primary btn-lg" onclick="location.href = '/adminPage'">글 목록</button>
-		<button type="button" class="btn btn-warning btn-lg" onclick="location.href = '/moveBoardModifyPage/'+${boardVO.bno}">글수정</button>
-		<button type="button" class="btn btn-danger btn-lg" onclick="deleteCheck()">글삭제</button>
+		<c:choose>
+			<c:when test="${user.getUserid() eq 'admin'}">
+				<button type="button" class="btn btn-primary btn-lg" onclick="location.href = '/adminPage'">글 목록</button>
+				<button type="button" class="btn btn-warning btn-lg" onclick="location.href = '/moveBoardModifyPage/'+${boardVO.bno}">글수정</button>
+				<button type="button" class="btn btn-danger btn-lg" onclick="deleteCheck()">글삭제</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" class="btn btn-primary btn-lg" onclick="location.href = '/'">글 목록</button>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<form action="/boardDelete" method="post" id="deleteForm">
 		<input type="hidden" name="_method" value="delete"> 

@@ -1,2 +1,40 @@
 @charset "UTF-8";
 
+.main-title{
+	color: black;
+	text-decoration: none; 
+}
+
+.main-title:hover {
+	color:gray;
+	text-decoration: none; 
+}
+
+.main-subheading{
+	margin-top: 30px;
+}
+
+.main-content{
+	padding: 35px 0 ;
+}
+
+.main-reportingDate{
+	color:gray; 
+}
+
+.main-pageNum{
+	color: black;
+	font-size: 30px;
+	padding: 15px 25px;
+	text-decoration: none; 
+}
+.main-pageNum:hover{
+	color: black;
+	text-decoration: underline;
+}
+.main-pageNum-nowPage , .main-pageNum-nowPage:hover{
+	color: black;
+	font-size: 30px;
+	padding: 15px 25px;
+	text-decoration: underline;
+}

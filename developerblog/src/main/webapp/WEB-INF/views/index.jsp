@@ -1,43 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>개발자의 길</title>
-
+ 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- font-awesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/css/indexCss.css">
 </head> 
 <body> 
 	<jsp:include page="/WEB-INF/include/navigationBar.jsp"></jsp:include>
 	<header>
+		<div style="height: 100px;"></div>
 		<div class="container text-center">
-			<h2>Hello, World!</h2>
-			<h5>나비효과, 시작은 미약하나 끝은 창대하리라</h5>
+			<h1 class="display-1"><strong>Hello, World!</strong></h1> 
 		</div>
-	</header>
-	
+		
+		<div class="container text-center">
+			<h2>나비효과, 시작은 미약하나 끝은 창대하리라</h2> 
+		</div>
+	</header> 
 	<!-- 10개 단위마다 페이징 -->	
-	<!-- Main Content -->
-	<div class="container">
-		<article class="post-preview">
-	        <a href="/post/what-is-new-in-java-14">
-	            <h2 class="post-title">자바 14 버전에서는 어떤 새로운 기능이 추가됐을까?</h2>
-	        </a>
-	        
-	            <h3 class="post-subtitle">JDK 14 버전에서는 어떤 기능이 새롭게 등장했을까? 그리고 어떤 기능이 사라졌을까?</h3>
-	        
-	        <p class="post-meta">Posted on June 19, 2020</p>
-	        
-	        <div class="blog-tags">#java  #jdk14  #openjdk</div>
-	        
-	    </article>
+	<!-- Main Content --> 
+	<c:forEach items="${reportListPart }" var="boardList">
+		<div class="container" style="padding-left: 150px; padding-right: 150px;">
+			<article class="main-content">
+		    	<h2><a href="/boardDetails/${boardList.bno}" class="main-title">${boardList.title}</a></h2>
+		        <h3 class="main-subheading">${boardList.subheading }</h3>
+		        <p class="main-reportingDate"><fmt:formatDate value="${boardList.reportingDate }" pattern="yyyy.MM.dd"/></p>
+		    </article>
+		<hr>		
+		</div>
+	</c:forEach>
+	
+	<div class="container text-center"> 
+		<c:choose>
+			<c:when test="${nowPage == 1 }">
+				<a href= "/?perPage=10&page=${nowPage}" class="main-pageNum-nowPage">${nowPage}</a>
+			</c:when>
+			<c:otherwise>
+				<a href= "/?perPage=10&page=${1}" class="main-pageNum">${1}</a>
+			</c:otherwise>
+		</c:choose> 
+		<span style="font-size: 30px">···</span> 
+		<c:forEach begin="${nowPage-1}" end="${nowPage+1}" var="i">
+			<c:choose>
+				<c:when test="${i < totalReports  && i > 1}"> 
+					<c:choose>
+						<c:when test="${i == nowPage }">
+							<a href= "/?perPage=10&page=${i}" class="main-pageNum-nowPage">${i}</a>
+						</c:when>
+						<c:otherwise>
+							<a href= "/?perPage=10&page=${i}" class="main-pageNum">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+			</c:choose>
+		</c:forEach> 
+		<span style="font-size: 30px">···</span>
+		<c:choose>
+			<c:when test="${nowPage == totalReports }">
+				<a href= "/?perPage=10&page=${totalReports}" class="main-pageNum-nowPage">${totalReports}</a>
+			</c:when>
+			<c:otherwise>
+				<a href= "/?perPage=10&page=${totalReports}" class="main-pageNum">${totalReports}</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
+	<hr> 
+	
+	
 	<jsp:include page="/WEB-INF/include/footer.jsp"></jsp:include>
 	 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
