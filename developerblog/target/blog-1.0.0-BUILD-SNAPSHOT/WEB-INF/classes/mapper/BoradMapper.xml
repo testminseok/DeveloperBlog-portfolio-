@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.developer.blog.mapper.BoardMapper">
+	
+	<!-- 게시글 전체목록 불러오기 -->
+	<select id="getReportListAll" resultType="com.developer.blog.domain.BoardVO">
+		SELECT * 
+		FROM BLOGBOARD
+	</select>		
+	
+	<!-- 게시글 쓰기 -->
+	<insert id="reportWrite" parameterType="com.developer.blog.domain.BoardVO">
+		INSERT INTO BLOGBOARD 
+		VALUES(
+			'${title}',
+			'${subheading}',
+			'${writer}',
+			SYSDATE,
+			'${content}',
+			BNO_SEQ.NEXTVAL 
+		)
+	</insert>
+	
+	<!-- 게시글번호로 해당 게시글정보가져오기 -->
+	<select id="getBoardData" parameterType="Integer" resultType="com.developer.blog.domain.BoardVO">
+		SELECT *
+		FROM BLOGBOARD
+		WHERE BNO = ${bno}
+	</select>
+	
+	<!-- 게시글 번호로 게시글 수정하기 -->
+	<update id="boardModify" parameterType="com.developer.blog.domain.BoardVO">
+		UPDATE BLOGBOARD
+		SET TITLE = '${title}',
+			SUBHEADING = '${subheading}',
+			CONTENT = '${content}'
+		WHERE BNO = '${bno}'
+			
+	</update>
+	
+	<!-- 게시글 번호로 게시글 삭제하기 -->
+	<delete id="boardDelete" parameterType="Integer" >
+		DELETE FROM BLOGBOARD
+		WHERE BNO = '${bno}'
+	</delete>
+	
+	<!-- 게시글 목록 페이징 -->
+	<select id="getReportListPart" parameterType="map" resultType="com.developer.blog.domain.BoardVO">
+		SELECT * 
+		FROM ( 
+				SELECT ROWNUM rn, a.*
+		        FROM ( 
+		        		SELECT * 
+		                FROM BLOGBOARD
+		                ORDER BY BNO DESC
+		              ) a
+		      )
+		WHERE rn BETWEEN ${startNum} AND ${endNum}
+	</select>
+	
+	<!-- 게시글 전체 글 수 -->
+	<select id="getReportListAllCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM BLOGBOARD
+	</select>
+
+	
+</mapper>
