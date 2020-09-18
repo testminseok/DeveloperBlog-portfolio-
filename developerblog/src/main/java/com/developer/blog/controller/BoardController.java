@@ -94,9 +94,17 @@ public class BoardController {
 	//글 수정 페이지 이동
 	@GetMapping("/moveBoardModifyPage/{bno}")
 	public String moveBoardModifyPage(@PathVariable("bno") int bno, Model model) {
+		List<String> categoryList = boardService.getCategoryList();
+		List<String> categoryDeduplication = new ArrayList<String>();
 		
 		BoardVO boardVO = boardService.getBoardData(bno);
 		
+		for (String categoryName : categoryList) {
+			if(!categoryDeduplication.contains(categoryName)) {
+				categoryDeduplication.add(categoryName);
+			}
+		}
+		model.addAttribute("categoryDeduplication",categoryDeduplication);
 		model.addAttribute("boardVO",boardVO);
 		return "board/admin/boardModify";
 	}

@@ -11,16 +11,13 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/include/navigationBar.jsp"></jsp:include> 
-<h2 class="text-center">글 작성</h2><br><br><br>
-
 <div class="container">
-	<h4 class="display-4">작성자 : ${boardVO.writer}</h4> 
-	<h1 class="display-3">제목 :${boardVO.title }</h1>
-	<h2 class="display-4">소제목 :${boardVO.subheading }</h2>
+	<h1 class="display-3">${boardVO.title }</h1>
+	<h2 class="display-4">${boardVO.subheading }</h2>
 	<h4 class="display-4"><fmt:formatDate value="${boardVO.reportingDate }" pattern="yyyy.MM.dd"/></h4>
 	<br>
 	<hr>
-	<div id="content"></div>
+	<div id="content"></div> 
 	<hr>
 	<div class="float-right">
 		<c:choose>

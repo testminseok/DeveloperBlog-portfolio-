@@ -22,7 +22,8 @@
 			<h2>The only thing worse than starting something and failing ... is not starting something.</h2> 
 		</div>
 	</header> 
-	<!-- 10개 단위마다 페이징 -->	
+	
+	<!-- 10개씩 보여주기 -->	
 	<!-- Main Content -->
 	<div class="mt-5"> 
 		<c:forEach items="${reportListPart }" var="boardList">
@@ -37,6 +38,7 @@
 		</c:forEach>
 	</div>
 	
+	<!-- 페이징 -->
 	<div class="container text-center"> 
 		<c:choose>
 			<c:when test="${nowPage == 1 }">
